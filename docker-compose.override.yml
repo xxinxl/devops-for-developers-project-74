@@ -5,7 +5,19 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./app:/app
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
+    environment:
+      - NODE_ENV=development
     user: "1000:1000"
     command: make dev
+
+  caddy:
+    image: caddy:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./services/caddy/Caddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - app
