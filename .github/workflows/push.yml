@@ -25,3 +25,4 @@ jobs:
 
       - name: Push image
         run: docker compose -f docker-compose.yml push app 
+ 
