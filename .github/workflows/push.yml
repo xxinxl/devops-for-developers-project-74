@@ -18,10 +18,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image
-        run: docker-compose -f docker-compose.yml build app
+        run: docker compose -f docker-compose.yml build app
 
       - name: Run tests
-        run: docker-compose -f docker-compose.yml up --abort-on-container-exit --exit-code-from app
+        run: docker compose -f docker-compose.yml up --abort-on-container-exit --exit-code-from app
 
       - name: Push image
-        run: docker-compose -f docker-compose.yml push app
+        run: docker compose -f docker-compose.yml push app
