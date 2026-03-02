@@ -17,15 +17,17 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Create .env file for tests
+        run: |
+          echo "DATABASE_HOST=db" > .env
+          echo "DATABASE_NAME=postgres" >> .env
+          echo "DATABASE_USERNAME=postgres" >> .env
+          echo "DATABASE_PASSWORD=password" >> .env
+
       - name: Build image
         run: docker compose -f docker-compose.yml build app
 
       - name: Run tests
-        env:
-          DATABASE_HOST: db
-          DATABASE_NAME: postgres
-          DATABASE_USERNAME: postgres
-          DATABASE_PASSWORD: password
         run: docker compose -f docker-compose.yml up --abort-on-container-exit --exit-code-from app
 
       - name: Push image
