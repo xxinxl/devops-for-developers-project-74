@@ -7,8 +7,8 @@ services:
       - POSTGRES_DB=postgres
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
+      interval: 3s
+      timeout: 3s
       retries: 5
 
   app:
@@ -16,6 +16,7 @@ services:
       context: .
       dockerfile: Dockerfile.production
     image: nataliiiaaaa/devops-for-developers-project-74
+    entrypoint: ["sh", "-c", "sleep 10 && exec \"$$@\"", "--"]
     environment:
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
