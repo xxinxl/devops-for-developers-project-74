@@ -12,3 +12,8 @@ test:
 
 ci:
 	docker-compose -f docker-compose.yml up --abort-on-container-exit --exit-code-from app
+
+setup:
+	cp -n .env.example .env
+	npm install
+	npm run migrate
