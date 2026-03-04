@@ -1,10 +1,10 @@
 require('dotenv').config();
 
-const dbDialect = process.env.DATABASE_HOST ? 'postgres' : 'sqlite';
+const currentDialect = process.env.DATABASE_HOST === 'db' ? 'postgres' : 'sqlite';
 
 module.exports = {
   development: {
-    dialect: dbDialect,
+    dialect: currentDialect,
     storage: './database.sqlite',
     database: process.env.DATABASE_NAME || 'postgres',
     username: process.env.DATABASE_USERNAME || 'postgres',
